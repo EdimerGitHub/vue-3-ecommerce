@@ -1,15 +1,17 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <v-cart>
+        <v-card-title>
+            EAcerca de esta tienda
+        </v-card-title>
+
+        <v-card-text>
+            <p>Esta es una tienda onlkine online online online online </p>
+            <p>Esta es una tienda onlkine online online online online </p>
+            <p>contactanos  </p>
+            <p>Estaes@tutienda.online</p>
+        </v-card-text>
+    </v-cart>
+
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+
