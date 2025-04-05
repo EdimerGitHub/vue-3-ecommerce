@@ -1,6 +1,7 @@
 <script lang="ts">//componente hijo
 import type { PropType } from "vue";
 import type { Product } from "../model/types";
+import { useCartStore } from '@/stores/cart';
 
 export default {
         props: {
@@ -9,11 +10,10 @@ export default {
                 required: true
             }
         },
-        emits : ['addProduct'],
         methods: {
             OnAddButtonClick(){
-                //console.log('Agregando producto'+ this.product.id);
-                this.$emit('addProduct')
+                const cartStore = useCartStore();
+                cartStore.addProduct(this.product.id);
             }
         }
 }
@@ -33,7 +33,7 @@ export default {
         </v-card-title>
 
         <v-card-text>
-            <p class="mb-2">
+            <p class="mb-4">
                 Esta es una descripcion que describe la descripcion de lo descrito.
             </p>
             <v-chip>
