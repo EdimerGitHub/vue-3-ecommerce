@@ -1,5 +1,7 @@
 <script lang="ts">
 import type { Category } from '@/model/types';
+import { useProductsStore } from '@/stores/products';
+import { mapActions } from 'pinia';
 
     export default {
         data() {
@@ -37,12 +39,13 @@ import type { Category } from '@/model/types';
                     name: 'home'
                 });
             },
-            selectCategory(categoryId: number) {
+            goToCategory(categoryId: number) {
                 this.$router.push({
                     name: 'category',
                     params: { categoryId }
                 })
-            }
+            },
+            ...mapActions(useProductsStore, ['orderByName', 'orderByPrice'])
         }
 
     }
@@ -67,7 +70,7 @@ import type { Category } from '@/model/types';
                 :title= "category.name" 
                 link
                 :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
-                @click="selectCategory(category.id)">
+                @click="goToCategory(category.id)">
             </v-list-item>
 
             <v-divider class="my-2"></v-divider>
@@ -77,15 +80,15 @@ import type { Category } from '@/model/types';
             </v-list-subheader>
 
             <v-list-item
-                color="grey-lighten-4"
                 title="Por precio"
-                link>
+                link
+                @click="orderByPrice">
             </v-list-item>
             <v-list-item
-                color="grey-lighten-4"
                 title="Por nombre"
-                link>
+                link
+                @click="orderByName">
             </v-list-item>
         </v-list>
-    </v-sheet>    
+    </v-sheet>   
 </template>
