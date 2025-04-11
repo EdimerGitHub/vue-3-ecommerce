@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Category } from '@/model/types';
+
     export default {
         data() {
             return{
@@ -28,27 +29,63 @@ import type { Category } from '@/model/types';
                     name: 'Vitaminas',
                     description: 'Descubre nuestra variedad de vitaminas a corde a tu necesidad'
                 }] as Category[]
+            };
+        },
+        methods: {
+            clearCategory(){
+                this.$router.push({
+                    name: 'home'
+                });
+            },
+            selectCategory(categoryId: number) {
+                this.$router.push({
+                    name: 'category',
+                    params: { categoryId }
+                })
             }
         }
+
     }
 </script>
 <template>
     <v-sheet rounded="lg">
         <v-list rounded="lg">
+            <v-list-subheader>
+                categorias
+            </v-list-subheader>
+
+            <v-list-item 
+                link 
+                @click="clearCategory()" 
+                :active="$route.name === 'home'"
+                title="Todas">
+            </v-list-item>
+
             <v-list-item
                 v-for="category in categories"
                 :key="category.id"
-                :title= "category.name"
+                :title= "category.name" 
                 link
-            ></v-list-item>
+                :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
+                @click="selectCategory(category.id)">
+            </v-list-item>
 
             <v-divider class="my-2"></v-divider>
 
+            <v-list-subheader>
+                Orden
+            </v-list-subheader>
+
             <v-list-item
                 color="grey-lighten-4"
-                title="Order by price"
-                link
-            ></v-list-item>
+                title="Por precio"
+                link>
+            </v-list-item>
+            <v-list-item
+                color="grey-lighten-4"
+                title="Por nombre"
+                link>
+            </v-list-item>
         </v-list>
     </v-sheet>    
 </template>
