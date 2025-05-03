@@ -20,17 +20,26 @@ export default{
         </v-avatar>
 
         <RouterLink to="/" custom v-slot="{navigate}">
-          <v-btn prepend-icon="mdi-home-variant" :active="$route.name === 'home'" variant="text" @click="navigate">Home</v-btn>
+          <v-btn  :active="$route.name === 'home'" variant="text" @click="navigate">
+                <v-icon icon="mdi-home-variant"></v-icon>
+            <span class="d-none d-sm-flex">Inicio</span>
+          </v-btn>
         </RouterLink>
 
         <RouterLink to="/cart" custom v-slot="{navigate}">
           <v-badge :content="itemsCount" :model-value="itemsCount > 0" color="orange-lighten-2">
-            <v-btn prepend-icon="mdi-cart" :active="$route.name === 'cart'" variant="text" @click="navigate">Cart</v-btn>
+            <v-btn  :active="$route.name === 'cart'" variant="text" @click="navigate">
+                <v-icon icon="mdi-cart"></v-icon>
+              <span class="d-none d-sm-flex">Carrito</span>
+            </v-btn>
           </v-badge>
         </RouterLink>
 
         <RouterLink to="/about" custom v-slot="{navigate}">
-          <v-btn prepend-icon="mdi-information" :active="$route.name === 'about'" variant="text" @click="navigate">About</v-btn>
+          <v-btn  :active="$route.name === 'about'" variant="text" @click="navigate">
+            <v-icon icon="mdi-information"></v-icon>
+            <span class="d-none d-sm-flex">Acerca de</span>
+          </v-btn>
         </RouterLink>
 
         <v-spacer></v-spacer>

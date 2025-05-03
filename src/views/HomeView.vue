@@ -2,6 +2,8 @@
 <script lang="ts">
 import ProductList from '@/components/ProductList.vue';
 import LeftMenu from '@/components/left/LeftMenu.vue';
+import CarouselImg from '@/components/CarouselImg.vue';
+import { useCategoriesStore } from '@/stores/categories';
 import { useProductsStore } from '@/stores/products';
 
 function updateCategoryFromRouteParams(categoryIdParam: string|string[]){
@@ -14,7 +16,8 @@ function updateCategoryFromRouteParams(categoryIdParam: string|string[]){
   export default {
     components: {
       ProductList,
-      LeftMenu
+      LeftMenu,
+      CarouselImg
     },
     methods: {
      
@@ -24,17 +27,25 @@ function updateCategoryFromRouteParams(categoryIdParam: string|string[]){
     },
     beforeRouteUpdate(to) {
       updateCategoryFromRouteParams(to.params.categoryId)
+    },
+    mounted() {
+      console.log('mounted')
+      const productsStore = useProductsStore();
+      productsStore.fetchProducts();
+
+      const categoriesStore = useCategoriesStore();
+      categoriesStore.fetchCategories();
     }
   }
 </script>
 
 <template>
-
+  <v-row><CarouselImg/></v-row>
   <v-row>
-    <v-col cols="2">
+    <v-col cols="12" sm="3" md="3" lg="2">
       <LeftMenu/>
     </v-col>
-    <v-col cols="10">
+    <v-col cols="12" sm="9" md="9" lg="10">
       <ProductList />
     </v-col>
   </v-row>
